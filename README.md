@@ -1,5 +1,7 @@
 # Sanjeevani: Pharmacy Command Dashboard 🧬
 
+**Live Website Preview:** [sanjeevani-blond.vercel.app](https://sanjeevani-blond.vercel.app/)
+
 A hyper-fast, 100% serverless medical intelligence frontend built to proactively decrypt, analyze, and map lethal pharmaceutical conflicts before a prescription ever reaches a patient. Designed specifically for under-resourced rural healthcare environments.
 
 ![Sanjeevani Dashboard](https://img.shields.io/badge/Medical_Grade-Passed-1a6b42?style=for-the-badge)
