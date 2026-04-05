@@ -103,14 +103,14 @@ function App() {
       <div className="main-content" style={{ zIndex: 10 }}>
         
         {/* Row 1: Conflict Graph (tall) */}
-        <div className="glass-panel" style={{ flex: 2, display: 'flex', flexDirection: 'column', minHeight: 0, background: arMode ? 'rgba(255,255,255,0.6)' : 'var(--white-panel)' }}>
+        <div className="glass-panel" style={{ flex: 2, display: 'flex', flexDirection: 'column', background: arMode ? 'rgba(255,255,255,0.6)' : 'var(--white-panel)', minHeight: '400px' }}>
           <div className="widget-header">
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
               Medication Conflict Graph
             </h3>
             {selectedPatient && <span className="pill safe" style={{ fontSize: '0.7rem' }}>{selectedPatient.name} (Age {selectedPatient.age})</span>}
           </div>
-          <div className="widget-body" style={{ padding: 0, flex: 1, minHeight: 0 }}>
+          <div className="widget-body" style={{ padding: 0, flex: 1 }}>
             <ConflictGraph 
               patient={selectedPatient} 
               onInteractionClick={(interaction) => setSelectedInteraction(interaction)} 
@@ -119,11 +119,11 @@ function App() {
         </div>
 
         {/* Row 2: AI Risk Analysis + Validation side by side */}
-        <div style={{ flex: 1, display: 'flex', gap: '1rem', minHeight: 0 }}>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div style={{ flex: 1, display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
             <InteractionViewer interaction={selectedInteraction} patient={selectedPatient} />
           </div>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: '300px' }}>
             <ValidationPanel patient={selectedPatient} />
           </div>
         </div>
