@@ -90,7 +90,47 @@ function App() {
         />
       )}
 
-      {/* LEFT: Narrow controls sidebar */}
+      {/* CENTER: Wide Patient List - most visible */}
+      <div style={{ width: '360px', minWidth: '320px', display: 'flex', flexDirection: 'column', zIndex: 10 }}>
+        <PatientList 
+          selectedPatientId={selectedPatientId} 
+          onSelectPatient={handlePatientSelect} 
+        />
+      </div>
+
+
+      {/* Main Analytics Area */}
+      <div className="main-content" style={{ zIndex: 10 }}>
+        
+        {/* Row 1: Conflict Graph (tall) */}
+        <div className="glass-panel" style={{ flex: 2, display: 'flex', flexDirection: 'column', minHeight: 0, background: arMode ? 'rgba(255,255,255,0.6)' : 'var(--white-panel)' }}>
+          <div className="widget-header">
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
+              Medication Conflict Graph
+            </h3>
+            {selectedPatient && <span className="pill safe" style={{ fontSize: '0.7rem' }}>{selectedPatient.name} (Age {selectedPatient.age})</span>}
+          </div>
+          <div className="widget-body" style={{ padding: 0, flex: 1, minHeight: 0 }}>
+            <ConflictGraph 
+              patient={selectedPatient} 
+              onInteractionClick={(interaction) => setSelectedInteraction(interaction)} 
+            />
+          </div>
+        </div>
+
+        {/* Row 2: AI Risk Analysis + Validation side by side */}
+        <div style={{ flex: 1, display: 'flex', gap: '1rem', minHeight: 0 }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <InteractionViewer interaction={selectedInteraction} patient={selectedPatient} />
+          </div>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+            <ValidationPanel patient={selectedPatient} />
+          </div>
+        </div>
+
+      </div>
+
+      {/* RIGHT: Narrow controls sidebar */}
       <div className="sidebar" style={{ zIndex: 10, width: '200px', minWidth: '200px' }}>
         <div className="glass-panel" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem' }}>
           <div className="logo-text" style={{ fontSize: '20px' }}>Sanjeevani</div>
@@ -151,45 +191,6 @@ function App() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* CENTER: Wide Patient List - most visible */}
-      <div style={{ width: '360px', minWidth: '320px', display: 'flex', flexDirection: 'column', zIndex: 10 }}>
-        <PatientList 
-          selectedPatientId={selectedPatientId} 
-          onSelectPatient={handlePatientSelect} 
-        />
-      </div>
-
-      {/* RIGHT: Main Analytics Area */}
-      <div className="main-content" style={{ zIndex: 10 }}>
-        
-        {/* Row 1: Conflict Graph (tall) */}
-        <div className="glass-panel" style={{ flex: 2, display: 'flex', flexDirection: 'column', minHeight: 0, background: arMode ? 'rgba(255,255,255,0.6)' : 'var(--white-panel)' }}>
-          <div className="widget-header">
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
-              Medication Conflict Graph
-            </h3>
-            {selectedPatient && <span className="pill safe" style={{ fontSize: '0.7rem' }}>{selectedPatient.name} (Age {selectedPatient.age})</span>}
-          </div>
-          <div className="widget-body" style={{ padding: 0, flex: 1, minHeight: 0 }}>
-            <ConflictGraph 
-              patient={selectedPatient} 
-              onInteractionClick={(interaction) => setSelectedInteraction(interaction)} 
-            />
-          </div>
-        </div>
-
-        {/* Row 2: AI Risk Analysis + Validation side by side */}
-        <div style={{ flex: 1, display: 'flex', gap: '1rem', minHeight: 0 }}>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-            <InteractionViewer interaction={selectedInteraction} patient={selectedPatient} />
-          </div>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-            <ValidationPanel patient={selectedPatient} />
-          </div>
-        </div>
-
       </div>
 
       {/* Social Impact Mission Modal */}
